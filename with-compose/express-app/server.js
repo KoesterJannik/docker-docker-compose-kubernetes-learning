@@ -1,7 +1,10 @@
 const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config();
 const cors = require("cors");
 const { ObjectId } = require("mongodb");
 const connectAndGetClient = require("./mongodb-connection");
+console.log(process.env.DATABASE_URL);
 
 const port = 3000;
 const app = express();
@@ -39,6 +42,7 @@ app.get("/", async (req, res) => {
 });
 
 app.listen(port, async () => {
+  console.log("Connecting to MongoDB...");
   client = await connectAndGetClient();
   console.log(`Server is listening on port ${port}`);
 });
